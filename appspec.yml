@@ -1,0 +1,21 @@
+version: 0.0
+os: linux
+files:
+  - source: /target/nextwork-web-project.war
+    destination: /usr/share/tomcat/webapps/
+hooks:
+  BeforeInstall:
+    - location: scripts/install_dependencies.sh
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: scripts/start_server.sh
+      timeout: 300
+      runas: root
+  ApplicationStop:
+    - location: scripts/stop_server.sh
+      timeout: 300
+      runas: root
+
+# 💡 What does each section in appspec.yml mean?
+# The appspec.yml file is like the instruction manual for AWS CodeDeploy. It tells CodeDeploy what to do to deploy your app, and when to do each step.
